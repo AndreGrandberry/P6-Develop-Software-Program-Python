@@ -9,12 +9,13 @@ function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
 	const [username, setUsername] = useState('')
 	const handleLogout = () => {
+        // Function to handle user logout
 		console.log("Logging out")
 		localStorage.removeItem('access_token');
 		setIsLoggedIn(false)
 	}
 	useEffect(() => {
-
+        // On component mount, validate the token if it exists
 		const isTokenValid = async (token) => {
 			const accessToken = localStorage.getItem('access_token');
 			const result = await validateToken(accessToken)
@@ -31,6 +32,7 @@ function App() {
 	}, [])
 
 	useEffect(() => {
+        // Effect to fetch and set the username when login state changes
 		const fetchUsername = async () => {
 			if (isLoggedIn) {
 				const user = await getUsername()

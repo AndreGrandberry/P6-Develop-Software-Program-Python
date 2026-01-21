@@ -112,9 +112,9 @@ def vm_list():
 def vm_cluster_delete(cluster: int):
     """Deletes a cluster given an ID
 
-    Expects JWT token in Authorization header
+       Expects JWT token in Authorization header
 
-    Returns True if the deletion was successful, else False
+       Returns True if the deletion was successful, else False
 
     """
     username = get_username_from_token()

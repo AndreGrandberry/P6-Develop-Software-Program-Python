@@ -4,17 +4,19 @@ import {Form, Button, Container, Row, Col, Card} from 'react-bootstrap';
 
 
 function Login({setIsLoggedIn}) {
+    // Functional component for Login page
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 
 const handleSubmit = async (event) => {
+   // Handle form submission for login
   event.preventDefault();
   if (!username || !password || username.trim() === '' || password.trim() === '') {
     setError('Please enter both username and password.');
     return;
   }
-  try {
+  try { // Attempt to log in the user
     const authenticateUser = await loginUser(username, password);
     if (authenticateUser.login_status === 'success') {
       localStorage.setItem('access_token', authenticateUser.token);

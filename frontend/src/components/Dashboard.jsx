@@ -28,6 +28,7 @@ function Dashboard({username}) {
 	const [deleteStatusMessage, setDeleteStatusMessage] = useState('')
 
 	const handleClusterCheckboxChange = useCallback((clusterId) => {
+        // Function to handle individual cluster checkbox changes
 		setSelectedClusterIds(prevSelected => {
 			const newSelected = new Set(prevSelected);
 			if (newSelected.has(clusterId)) {
@@ -40,6 +41,7 @@ function Dashboard({username}) {
 	}, []);
 
 	const handleSelectAllCheckboxChange = useCallback((event) => {
+        // Function to handle "Select All" checkbox changes
 		if (event.target.checked) {
 			const allClusterIds = new Set(tableData.map(cluster => cluster.id));
 			setSelectedClusterIds(allClusterIds);
@@ -49,6 +51,7 @@ function Dashboard({username}) {
 	}, [tableData]);
 
 	const handleNextPage = useCallback(() => {
+        // Function to handle pagination to the next page
 		if (currentDisplaySource && (tableRange[1] < currentDisplaySource.length)) {
 			setPage(prevPage => prevPage + 1);
 			setTableRange(prevRange => [prevRange[0] + displayNumber, prevRange[1] + displayNumber]);
@@ -57,6 +60,7 @@ function Dashboard({username}) {
 	}, [currentDisplaySource, tableRange, displayNumber]);
 
 	const handlePrevPage = useCallback(() => {
+        // Function to handle pagination to the previous page
 		if (page > 0) { // Check if not on the first page
 			setPage(prevPage => prevPage - 1);
 			setTableRange(prevRange => [prevRange[0] - displayNumber, prevRange[1] - displayNumber]);
@@ -65,6 +69,7 @@ function Dashboard({username}) {
 	}, [page, displayNumber]);
 
 	const sortAscendingIds = useCallback((vmsData) => {
+        // Function to sort VMs by ascending IDs
 		setTableData([]);
 		setTableRange([0, displayNumber]);
 		setPage(0);
@@ -75,6 +80,7 @@ function Dashboard({username}) {
 	}, [currentDisplaySource]);
 
 	const sortDescendingIds = useCallback((vmsData) => {
+        // Function to sort VMs by descending IDs
 		setTableData([]);
 		setTableRange([0, displayNumber]);
 		setPage(0);
@@ -85,6 +91,7 @@ function Dashboard({username}) {
 	}, [currentDisplaySource]);
 
 	const sortAscendingUsers = useCallback((vmsData) => {
+        // Function to sort VMs by ascending usernames
 		setTableData([]);
 		setTableRange([0, displayNumber]);
 		setPage(0);
@@ -99,6 +106,7 @@ function Dashboard({username}) {
 	}, [currentDisplaySource]);
 
 	const sortDescendingUsers = useCallback((vmsData) => {
+        // Function to sort VMs by descending usernames
 		setTableData([]);
 		setTableRange([0, displayNumber]);
 		setPage(0);
@@ -114,12 +122,14 @@ function Dashboard({username}) {
 	}, [currentDisplaySource]);
 
 	const handleSwitchViewToggle = () => {
+        // Function to toggle between user-specific and all VMs view
 		setDisplayAllVMs(prevState => !prevState);
 		setTableRange([0, displayNumber]);
 		setPage(0)
 	}
 
 	const handleSearchCluster = (cluster) => {
+        // Function to handle searching clusters by user or ID
 		setTableData([]);
 		setTableRange([0, displayNumber]);
 		setPage(0);
@@ -145,6 +155,7 @@ function Dashboard({username}) {
 	}
 
 	const handleKeyDown = (event) => {
+        // Function to handle Enter key press in search input
 		if (event.key === 'Enter') {
 			event.preventDefault()
 			handleSearchCluster(searchQuery)
@@ -156,6 +167,7 @@ function Dashboard({username}) {
 	const handleDeleteStatusModalOpen = () => setShowDeleteStatusModal(true);
 	const handleDeleteStatusModalClose = () => setShowDeleteStatusModal(false)
 	const handleDeleteVMS = async (ids) => {
+        // Function to handle deletion of selected VMs
 		if (ids.size > 0) {
 			const result = await deleteVMS(ids)
 			console.log(result.status)
@@ -170,10 +182,12 @@ function Dashboard({username}) {
 	}
 
 	const handlePageReload = () => {
+        // Function to reload the page after deletion
 		if (deleteStatusMessage === 'success') window.location.reload()
 	}
 
 	useEffect(() => {
+        // Fetch initial VM data on component mount
 		async function fetchData() {
 			try {
 				let userData = await getVMFromUser();
@@ -191,6 +205,7 @@ function Dashboard({username}) {
 	}, []);
 
 	useEffect(() => {
+        // Effect to fetch and update table data based on current display source and pagination
 		let isCurrent = true; // Flag to handle race conditions for async operations
 		async function fetchTableData() {
 
@@ -208,7 +223,7 @@ function Dashboard({username}) {
 				setSelectedClusterIds(new Set());
 				if (!userVMData || userVMData.length === 0) {
 					if (isCurrent) {
-						setTableData([]);
+						setTableData([]); // Clear table if no data or still loading userVMData
 					}
 					return;
 				}
@@ -217,7 +232,7 @@ function Dashboard({username}) {
 				setSelectedClusterIds(new Set());
 				if (!searchCluster || searchCluster.length === 0) {
 					if (isCurrent) {
-						setTableData([]);
+						setTableData([]); // Clear table if no data or still loading searchCluster
 					}
 					return;
 				}
@@ -243,6 +258,7 @@ function Dashboard({username}) {
 				const globalIndex = tableRange[0] + i;
 
 				try {
+                    // Fetch detailed data for the VM
 					const vmDetails = displayAllVMs ? await displayVMDetailData(sourceData, globalIndex) : await displayVMDetailData(userVMData, globalIndex);
 					const vmVersion = displayAllVMs ? await getVersionData(sourceData, globalIndex) : await getVersionData(userVMData, globalIndex);
 					const vmLCData = displayAllVMs ? await getLCData(sourceData, globalIndex) : await getLCData(userVMData, globalIndex);
@@ -252,7 +268,7 @@ function Dashboard({username}) {
 
 					if (!isCurrent) return;
 
-					const completeRowData = {
+					const completeRowData = { // Construct complete row data
 						id: vm.id,
 						pod: vmPodbox || 'not found',
 						version: vmVersion || 'data not found',
@@ -264,7 +280,7 @@ function Dashboard({username}) {
 						errorMessage: '',
 					};
 
-					setTableData(prevData => {
+					setTableData(prevData => { // Update the specific row in tableData
 						return prevData.map(item => item.id === vm.id ? completeRowData : item);
 					});
 

@@ -1,5 +1,6 @@
 export const BACKEND_URL = `http://${window.location.hostname}:5000`
 export const getAllVMS = async () => {
+    // Call to fetch all VMs from the backend
 	console.log('GETTING ALL VMS')
 	try {
 		const response = await fetch(`${BACKEND_URL}/vms/all`);
@@ -11,6 +12,8 @@ export const getAllVMS = async () => {
 };
 
 export const displayVMDetailData = async (vmDetails, index) => {
+    // Call to fetch specific VM details from the backend
+    // using the vm_id obtained from vmDetails at the given index
 	console.log('GETTING VM DETAILS');
     try {
         const vms = await vmDetails;
@@ -31,6 +34,8 @@ export const displayVMDetailData = async (vmDetails, index) => {
 };
 
 export const deleteVMS = async (vmDeletionList) => {
+    // Call to delete VMs from the backend
+    // Given a list of vm IDs to delete
 	console.log("DELETING: ", vmDeletionList)
     const token = localStorage.getItem('access_token');
 	try {
@@ -51,6 +56,8 @@ export const deleteVMS = async (vmDeletionList) => {
 };
 
 export const getLCData = async (vmDetails, index) => {
+    // Call to fetch lifecycle data for a specific VM
+    // using the vm_id obtained from vmDetails at the given index
 	console.log('GETTING STATUS')
 	try {
 		const vms = await vmDetails
@@ -65,6 +72,8 @@ export const getLCData = async (vmDetails, index) => {
 };
 
 export const getPodboxData = async (vmDetails, index) => {
+    // Call to fetch podbox data for a specific VM
+    // using the vm_id obtained from vmDetails at the given index
   console.log('GETTING PODBOX DATA');
   try {
 		const vms = await vmDetails
@@ -80,6 +89,7 @@ export const getPodboxData = async (vmDetails, index) => {
 
 
 export const getVMFromUser = async () => {
+  // Call to fetch VMs associated with the current user
   console.log('GETTING VMS FROM CURRENT USER');
   try {
     const token = localStorage.getItem('access_token');
@@ -106,6 +116,8 @@ export const getVMFromUser = async () => {
 };
 
 export const getVersionData = async (vmDetails, index) => {
+    // Call to fetch version data for a specific VM
+    // using the vm_id obtained from vmDetails at the given index
 	console.log('GETTING VERSION DATA')
 	try {
 		const vms = await vmDetails
@@ -121,6 +133,8 @@ export const getVersionData = async (vmDetails, index) => {
 };
 
 export const loginUser = async (username = null, password = null, token = null) => {
+    // Call to log in user with username and password
+    // taking username and password as parameters
 	try {
 		const response = await fetch(`${BACKEND_URL}/login`, {
 			method: 'POST', headers: {
@@ -136,6 +150,8 @@ export const loginUser = async (username = null, password = null, token = null) 
 };
 
 export const validateToken = async (token) => {
+    // Call to validate the given token
+    // taking token as parameter
 	try {
 		const response = await fetch(`${BACKEND_URL}/validate`, {
 			method: 'POST', headers: {
@@ -151,6 +167,9 @@ export const validateToken = async (token) => {
 };
 
 export const getUsername = async () => {
+    // Call to fetch the username of the current user
+    // using the stored access token
+    // returns the username in uppercase or 'UNKNOWN USER' on failure
   try {
     const token = localStorage.getItem('access_token');
     const response = await fetch(`${BACKEND_URL}/whoami`, {
@@ -166,7 +185,7 @@ export const getUsername = async () => {
     return 'UNKNOWN USER';
   } catch (err) {
     console.log(err);
-    return 'bobby';
+    return 'UNKNOWN USER';
   }
 };
 
