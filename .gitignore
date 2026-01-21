@@ -1,0 +1,7 @@
+.env
+venv
+.idea/
+.DS_Store
+backend.tar
+frontend.tar
+*.pyc

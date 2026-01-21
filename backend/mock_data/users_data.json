@@ -1,0 +1,172 @@
+[
+  {
+    "authtype": "employee",
+    "email": "jdoe@cisco.com",
+    "fullname": "John Doe (jodoe)",
+    "id": 111,
+    "spusername": null,
+    "status": "active",
+    "username": "jodoe",
+    "userpass": null,
+    "vms": [
+      {
+        "vm_id": 111,
+        "deployedclustername": "jodoe_111",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+         "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-04T14:22:44.853144",
+        "deployedclusterowner": "jodoe"
+      },
+      {
+        "vm_id": 222,
+        "deployedclustername": "jodoe_222",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+        "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-05T11:15:30.123456",
+        "deployedclusterowner": "jodoe"
+      }
+    ]
+  },
+  {
+    "authtype": "employee",
+    "email": "jaoe@cisco.com",
+    "fullname": "Jane Doe (jaodoe)",
+    "id": 222,
+    "spusername": null,
+    "status": "active",
+    "username": "jadoe",
+    "userpass": null,
+    "vms": [
+      {
+        "vm_id": 333,
+        "deployedclustername": "jaodoe_333",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+        "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-05T10:15:44.853144",
+        "deployedclusterowner": "jadoe"
+      },
+      {
+        "vm_id": 444,
+        "deployedclustername": "jadoe_444",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+        "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-05T12:14:30.123456",
+        "deployedclusterowner": "jadoe"
+      }
+    ]
+  },
+  {
+    "authtype": "employee",
+    "email": "rsmith@cisco.com",
+    "fullname": "Robert Smith (rsmith)",
+    "id": 333,
+    "spusername": null,
+    "status": "active",
+    "username": "rsmith",
+    "userpass": null,
+    "vms": [
+      {
+        "vm_id": 555,
+        "deployedclustername": "rsmith_555",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+        "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-06T09:57:44.853144",
+        "deployedclusterowner": "rsmith"
+      },
+      {
+        "vm_id": 777,
+        "deployedclustername": "rsmith_777",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+        "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-06T10:13:30.123456",
+        "deployedclusterowner": "rsmith"
+      }
+    ]
+  },
+  {
+    "authtype": "employee",
+    "email": "ksmith@cisco.com",
+    "fullname": "Karen Smith (ksmith)",
+    "id": 444,
+    "spusername": null,
+    "status": "active",
+    "username": "ksmith",
+    "userpass": null,
+    "vms": [
+      {
+        "vm_id": 888,
+        "deployedclustername": "ksmith_888",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+        "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-07T13:32:44.853144",
+        "deployedclusterowner": "ksmith"
+      },
+      {
+        "vm_id": 999,
+        "deployedclustername": "ksmith_999",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+        "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-07T14:11:30.123456",
+        "deployedclusterowner": "ksmith"
+      }
+    ]
+  },
+  {
+    "authtype": "employee",
+    "email": "mjones@cisco.com",
+    "fullname": "Martin Jones (mjones)",
+    "id": 555,
+    "spusername": null,
+    "status": "active",
+    "username": "mjones",
+    "userpass": null,
+    "vms": [
+      {
+        "vm_id": 1010,
+        "deployedclustername": "mjones_1010",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+        "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-08T16:42:44.853144",
+        "deployedclusterowner": "mjones"
+      },
+      {
+        "vm_id": 1111,
+        "deployedclustername": "mjones_1111",
+        "deployedclusterdescr": "This is a mock",
+        "clusterdescr": "PODBOX16 (Automation)",
+        "podbox": "PODBOX16",
+        "version": "1.1.1",
+        "deployedvmstatus": "INSTALLED",
+        "deployedvmtimestamp": "2025-09-08T17:52:30.123456",
+        "deployedclusterowner": "mjones"
+      }
+    ]
+  }
+]

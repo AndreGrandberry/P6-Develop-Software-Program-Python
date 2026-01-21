@@ -1,0 +1,22 @@
+[
+  {
+    "username": "jodoe",
+    "password_hash": "fff986d73b3806b67c9eb21415fe5636175f9b9ccd7f2d2a3dfa2aadb2b46b73"
+  },
+  {
+    "username": "jadoe",
+    "password_hash": "1a87ab28dd9b8046073f91200d3ff7a1431d993ee830615770864fd6d45addfd"
+  },
+  {
+    "username": "rsmith",
+    "password_hash": "d84e2b8dd8cecfe6937f180346d9a1f7250a213d494d358db589077390b1ebcd"
+  },
+  {
+    "username": "ksmith",
+    "password_hash": "70f24cef9c72e20425f5e26dd71d4aca8c0629cb5663ad56b7db765275311a39"
+  },
+  {
+    "username": "mjones",
+    "password_hash": "11a9dcd0992779081da11d8748ef69367a2d49da7a200f9323485fb23a8069af"
+  }
+]
