@@ -35,7 +35,13 @@ class User:
 
     @staticmethod
     def load_user(user_id: str) -> Optional["User"]:
-        """Load user data from mock JSON file"""
+        """Load user data from mock JSON file
+
+        Takes in a user_id (username) string
+
+        Returns: User object if user exists, else return None
+
+        """
         users_file = os.path.join(
             os.path.dirname(__file__), "..", "mock_data", "users_data.json"
         )
@@ -51,7 +57,10 @@ class User:
 
     @staticmethod
     def get_all_vms() -> list:
-        """Get all VMs from all users in the mock JSON file"""
+        """Get all VMs from all users in the mock JSON file
+
+          Returns: list of all VM dictionaries
+        """
         users_file = os.path.join(
             os.path.dirname(__file__), "..", "mock_data", "users_data.json"
         )
@@ -69,12 +78,15 @@ class User:
         return self.username
 
     def vms_user(self):
-        """Returns the VMs associated with the user"""
+        """Returns the list of VM objects associated with the user"""
         return self.vms
 
     @staticmethod
     def get_vm(vm_id: int) -> Optional[VM]:
-        """Get a VM by vm_id from all users in the mock JSON file"""
+        """Get a VM by vm_id from all users in the mock JSON file
+
+           Takes in a vm_id integer and returns the VM dictionary if found
+        """
         all_vms = User.get_all_vms()
         for vm in all_vms:
             if vm["vm_id"] == vm_id:
@@ -83,7 +95,13 @@ class User:
 
     @staticmethod
     def delete_vm(username: str, vm_id: int) -> bool:
-        """Delete a VM by vm_id for a specific user and from vms_all.json."""
+        """Deletes a VM by vm_id for a specific user and from vms_all.json
+
+           Takes in a username string and vm_id integer
+
+           Returns: True if VM was deleted, else False
+
+        """
         users_file = os.path.join(
             os.path.dirname(__file__), "..", "mock_data", "users_data.json"
         )

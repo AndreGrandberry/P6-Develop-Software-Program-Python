@@ -9,7 +9,10 @@ CORS(app)
 
 @app.route("/login", methods=["POST"])
 def login():
-    """Authenticate user and return JWT token"""
+    """Authenticate user and return JWT token
+
+       Expects JSON payload with 'username' and 'password'
+    """
     json_data = request.get_json()
     username = json_data.get("username")
     password = json_data.get("password")
@@ -22,11 +25,14 @@ def login():
         )
     except RuntimeError:
         print(f"username: {username}" f"password: {password}")
-        return jsonify({"message": "Invalid credentials"}), 401
+        return jsonify({"login_status": "fail", "message": "Invalid credentials"}), 401
 
 
 def get_username_from_token():
-    """Extract username from JWT token in Authorization header"""
+    """Extract username from JWT token in Authorization header
+
+       Returns username if token is valid, else None
+    """
     token = request.headers.get("Authorization", "").replace("Bearer ", "")
     if not token:
         return None
@@ -39,7 +45,10 @@ def get_username_from_token():
 
 @app.route("/whoami")
 def whoami_sw_user():
-    """Returns User information for the user in the session"""
+    """Returns User information for the user in the session
+
+       Expects JWT token in Authorization header
+    """
     username = get_username_from_token()
     if not username:
         return jsonify({"error": "User not authenticated"}), 401
@@ -51,7 +60,12 @@ def whoami_sw_user():
 
 @app.route("/validate", methods=["POST"])
 def validate_token():
-    """Validates a JWT token"""
+    """Validates a JWT token
+
+    Expects JSON payload with 'token'
+
+    Returns True if the token is valid, else False
+    """
     token = request.json.get("token", None)
     if token is None:
         return jsonify({"token_validated": False}), 401
@@ -65,7 +79,11 @@ def validate_token():
 
 @app.route("/vms_by_user")
 def list_of_vms():
-    """Returns Cluster information for the user in the session"""
+    """Returns Cluster information for the user in the session
+
+       Expects JWT token in Authorization header
+
+    """
     username = get_username_from_token()
     if not username:
         return jsonify({"error": "User not authenticated"}), 401
@@ -92,7 +110,13 @@ def vm_list():
 
 @app.route("/vms/delete/<int:cluster>")
 def vm_cluster_delete(cluster: int):
-    """Deletes a cluster given a lc-cluster ID"""
+    """Deletes a cluster given an ID
+
+    Expects JWT token in Authorization header
+
+    Returns True if the deletion was successful, else False
+
+    """
     username = get_username_from_token()
     if not username:
         return jsonify({"error": "User not authenticated"}), 401

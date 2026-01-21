@@ -69,7 +69,7 @@ function Dashboard({username}) {
 		setTableRange([0, displayNumber]);
 		setPage(0);
 		console.log('SORTING (Ascending)');
-		const sortedVMs = vmsData.sort((a, b) => a.id - b.id);
+		const sortedVMs = vmsData.sort((a, b) => a.vm_id - b.vm_id);
 		console.log('SORTED (Ascending)');
 		setCurrentDisplaySource(sortedVMs);
 	}, [currentDisplaySource]);
@@ -79,7 +79,7 @@ function Dashboard({username}) {
 		setTableRange([0, displayNumber]);
 		setPage(0);
 		console.log('SORTING (Descending)');
-		const sortedVMs = vmsData.sort((a, b) => b.id - a.id);
+		const sortedVMs = vmsData.sort((a, b) => b.vm_id - a.vm_id);
 		console.log('SORTED (Descending)');
 		setCurrentDisplaySource(sortedVMs);
 	}, [currentDisplaySource]);

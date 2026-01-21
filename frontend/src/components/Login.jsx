@@ -8,25 +8,26 @@ function Login({setIsLoggedIn}) {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 
-	const handleSubmit = async (event) => {
-		event.preventDefault();
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  if (!username || !password || username.trim() === '' || password.trim() === '') {
+    setError('Please enter both username and password.');
+    return;
+  }
+  try {
+    const authenticateUser = await loginUser(username, password);
+    if (authenticateUser.login_status === 'success') {
+      localStorage.setItem('access_token', authenticateUser.token);
+      setIsLoggedIn(true);
+    } else {
+      setError('Incorrect username and/or password. Please try again.');
+    }
+  } catch (err) {
+      console.error(err);
+    setError('Server error. Please try again later.');
+  }
+};
 
-		if (!username || !password || username.trim() === '' || password.trim() === '') {
-			setError('Please enter both username and password.');
-			return;
-		}
-
-		const authenticateUser = await loginUser(username, password)
-        console.log('Token before localStorage:', authenticateUser.token);
-		if (authenticateUser.login_status === 'success') {
-			localStorage.setItem('access_token', authenticateUser.token)
-			console.log('Access Token set!')
-			alert('Login Successful')
-			setIsLoggedIn(true)
-		} else if (authenticateUser.login_status === 'fail') {
-			setError('Incorrect username and/or password. Please try again.')
-		}
-	}
 
 	return (<Container className="login-card">
 		<Row className="justify-content-md-center">
