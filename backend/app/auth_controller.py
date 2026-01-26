@@ -2,7 +2,7 @@ import jwt
 import hashlib
 import os
 import json
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 
 
 class VMAuth:
@@ -62,7 +62,7 @@ class VMAuth:
         """
         payload = {
             "username": username,
-            "exp": datetime.utcnow() + timedelta(seconds=self.JWT_EXP_DELTA_SECONDS),
+            "exp": datetime.now(UTC) + timedelta(seconds=self.JWT_EXP_DELTA_SECONDS),
         }
         return jwt.encode(payload, self.JWT_SECRET, algorithm=self.JWT_ALGORITHM)
 

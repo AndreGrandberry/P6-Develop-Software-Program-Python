@@ -1,0 +1,48 @@
+@startuml
+
+class VM {
+  +int vm_id
+  +str deployedclustername
+  +str deployedclusterdescr
+  +str clusterdescr
+  +str podbox
+  +str version
+  +str deployedvmstatus
+  +str deployedvmtimestamp
+  +str deployedclusterowner
+}
+
+class User {
+  +str authtype
+  +str email
+  +str fullname
+  +int id
+  +Optional[str] spusername
+  +str status
+  +str username
+  +Optional[str] userpass
+  +List<VM> vms
+  +load_user(user_id: str)
+  +get_all_vms()
+  +whoami()
+  +vms_user()
+  +get_vm(vm_id: int)
+  +delete_vm(username: str, vm_id: int)
+}
+
+class VMAuth {
+  +USERS_FILE
+  +JWT_SECRET
+  +JWT_ALGORITHM
+  +JWT_EXP_DELTA_SECONDS
+  +__init__()
+  +_load_users()
+  +_hash_password(password)
+  +authenticate(username, password)
+  +_generate_jwt(username)
+  +validate_token(token)
+}
+
+User "1" *-- "*" VM
+
+@enduml
