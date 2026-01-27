@@ -24,9 +24,9 @@ MOCK_USERS = [
                 "version": "1.0",
                 "deployedvmstatus": "INSTALLED",
                 "deployedvmtimestamp": "2024-01-01T00:00:00Z",
-                "deployedclusterowner": "testuser"
+                "deployedclusterowner": "testuser",
             }
-        ]
+        ],
     }
 ]
 
@@ -40,9 +40,10 @@ MOCK_VMS_ALL = [
         "version": "1.0",
         "deployedvmstatus": "INSTALLED",
         "deployedvmtimestamp": "2024-01-01T00:00:00Z",
-        "deployedclusterowner": "testuser"
+        "deployedclusterowner": "testuser",
     }
 ]
+
 
 class TestVMControllers(unittest.TestCase):
     @patch("os.path.exists", return_value=True)
@@ -71,7 +72,7 @@ class TestVMControllers(unittest.TestCase):
             status="active",
             username="alice",
             userpass=None,
-            vms=[]
+            vms=[],
         )
         self.assertEqual(user.whoami(), "alice")
 
@@ -85,7 +86,7 @@ class TestVMControllers(unittest.TestCase):
             version="v",
             deployedvmstatus="s",
             deployedvmtimestamp="t",
-            deployedclusterowner="o"
+            deployedclusterowner="o",
         )
         user = User(
             authtype="local",
@@ -96,7 +97,7 @@ class TestVMControllers(unittest.TestCase):
             status="active",
             username="alice",
             userpass=None,
-            vms=[vm]
+            vms=[vm],
         )
         self.assertEqual(user.vms_user(), [vm])
 
@@ -113,13 +114,21 @@ class TestVMControllers(unittest.TestCase):
         vm = User.get_vm(999)
         self.assertIsNone(vm)
 
-    @patch("os.path.exists", side_effect=lambda path: "users_data" in path or "vms_all" in path)
+    @patch(
+        "os.path.exists",
+        side_effect=lambda path: "users_data" in path or "vms_all" in path,
+    )
     @patch("builtins.open")
     def test_delete_vm(self, mock_open_func, mock_exists):
         # Setup mock for users_data.json and vms_all.json
         users_file = mock_open(read_data=json.dumps(MOCK_USERS))
         vms_all_file = mock_open(read_data=json.dumps(MOCK_VMS_ALL))
-        mock_open_func.side_effect = [users_file.return_value, users_file.return_value, vms_all_file.return_value, vms_all_file.return_value]
+        mock_open_func.side_effect = [
+            users_file.return_value,
+            users_file.return_value,
+            vms_all_file.return_value,
+            vms_all_file.return_value,
+        ]
         result = User.delete_vm("testuser", 101)
         self.assertTrue(result)
 
@@ -137,4 +146,3 @@ class TestVMControllers(unittest.TestCase):
     def test_delete_vm_file_not_exist(self, mock_exists):
         result = User.delete_vm("testuser", 101)
         self.assertFalse(result)
-

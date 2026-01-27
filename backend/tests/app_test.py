@@ -1,6 +1,7 @@
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from app.app import app
+
 
 class AppRoutesTestCase(unittest.TestCase):
     def setUp(self):
@@ -9,14 +10,18 @@ class AppRoutesTestCase(unittest.TestCase):
     @patch("app.app.VMAuth")
     def test_login_success(self, mock_auth):
         mock_auth.return_value.authenticate.return_value = "fake_token"
-        response = self.client.post("/login", json={"username": "user", "password": "pass"})
+        response = self.client.post(
+            "/login", json={"username": "user", "password": "pass"}
+        )
         self.assertEqual(response.status_code, 200)
         self.assertIn("token", response.get_json())
 
     @patch("app.app.VMAuth")
     def test_login_fail(self, mock_auth):
         mock_auth.return_value.authenticate.side_effect = RuntimeError
-        response = self.client.post("/login", json={"username": "user", "password": "wrong"})
+        response = self.client.post(
+            "/login", json={"username": "user", "password": "wrong"}
+        )
         self.assertEqual(response.status_code, 401)
         self.assertIn("login_status", response.get_json())
 
@@ -35,7 +40,10 @@ class AppRoutesTestCase(unittest.TestCase):
 
     @patch("app.app.VMAuth")
     def test_validate_token_valid(self, mock_auth):
-        mock_auth.return_value.validate_token.return_value = (True, {"username": "user"})
+        mock_auth.return_value.validate_token.return_value = (
+            True,
+            {"username": "user"},
+        )
         response = self.client.post("/validate", json={"token": "valid"})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.get_json()["token_validated"])
@@ -51,7 +59,9 @@ class AppRoutesTestCase(unittest.TestCase):
     @patch("app.app.User")
     def test_list_of_vms_success(self, mock_user, mock_token):
         mock_user.load_user.return_value.vms_user.return_value = {"vms": []}
-        response = self.client.get("/vms_by_user", headers={"Authorization": "Bearer fake"})
+        response = self.client.get(
+            "/vms_by_user", headers={"Authorization": "Bearer fake"}
+        )
         self.assertEqual(response.status_code, 200)
         self.assertIn("vms", response.get_json())
 
@@ -79,7 +89,9 @@ class AppRoutesTestCase(unittest.TestCase):
     @patch("app.app.User")
     def test_vm_cluster_delete_success(self, mock_user, mock_token):
         mock_user.delete_vm.return_value = True
-        response = self.client.get("/vms/delete/1", headers={"Authorization": "Bearer fake"})
+        response = self.client.get(
+            "/vms/delete/1", headers={"Authorization": "Bearer fake"}
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.get_json()["success"])
 
@@ -87,7 +99,9 @@ class AppRoutesTestCase(unittest.TestCase):
     @patch("app.app.User")
     def test_vm_cluster_delete_fail(self, mock_user, mock_token):
         mock_user.delete_vm.return_value = False
-        response = self.client.get("/vms/delete/1", headers={"Authorization": "Bearer fake"})
+        response = self.client.get(
+            "/vms/delete/1", headers={"Authorization": "Bearer fake"}
+        )
         self.assertEqual(response.status_code, 400)
         self.assertIn("error", response.get_json())
 
@@ -95,6 +109,7 @@ class AppRoutesTestCase(unittest.TestCase):
     def test_vm_cluster_delete_unauthenticated(self, mock_token):
         response = self.client.get("/vms/delete/1")
         self.assertEqual(response.status_code, 401)
+
 
 if __name__ == "__main__":
     unittest.main()

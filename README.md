@@ -9,7 +9,7 @@ Cluster Manager is a web application for managing user clusters. Users can log i
 ## How the App Works
 
 - **Login:**
-  Log in using one of the username and password combinations found in `mock_data/passwords.txt`.
+  Log in using one of the username and password combinations found in `backend/mock_data/passwords.txt`.
 
 - **User Clusters:**
   After logging in, you will see the clusters associated with your user account.
@@ -35,6 +35,10 @@ Cluster Manager is a web application for managing user clusters. Users can log i
 ## Setup Instructions
 
 1. Clone the repository.
+   ```bash
+    git clone https://github.com/AndreGrandberry/P6-Develop-Software-Program-Python.git
+    cd P6-Develop-Software-Program-Python/cluster-manager
+   ```
 2. Create and activate a Python virtual environment:
    ```bash
    python3 -m venv .venv
@@ -64,7 +68,7 @@ Cluster Manager is a web application for managing user clusters. Users can log i
    ```bash
    npm run dev
    ```
-6. Click the provided frontend localhost URL in your browser to access the application.
+6. Upon running the frontend a localhost URL will be provided in the terminal. Click on this URL.
 
 ---
 
@@ -82,10 +86,17 @@ pytest
 
 To ensure code quality, run `flake8` in the `backend` directory:
 
+- **Configuration**
 ```bash
 flake8 .
 black .
 ```
+- **HTML Report:**
+  To generate an HTML report of code quality, run:
+  ```bash
+  flake8 . --format=html --htmldir=flake8_report
+  ```
+  The report will be saved in the `flake8_report` directory.
 ---
 
 

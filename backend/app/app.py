@@ -11,7 +11,7 @@ CORS(app)
 def login():
     """Authenticate user and return JWT token
 
-       Expects JSON payload with 'username' and 'password'
+    Expects JSON payload with 'username' and 'password'
     """
     json_data = request.get_json()
     username = json_data.get("username")
@@ -31,7 +31,7 @@ def login():
 def get_username_from_token():
     """Extract username from JWT token in Authorization header
 
-       Returns username if token is valid, else None
+    Returns username if token is valid, else None
     """
     token = request.headers.get("Authorization", "").replace("Bearer ", "")
     if not token:
@@ -47,7 +47,7 @@ def get_username_from_token():
 def whoami_sw_user():
     """Returns User information for the user in the session
 
-       Expects JWT token in Authorization header
+    Expects JWT token in Authorization header
     """
     username = get_username_from_token()
     if not username:
@@ -81,7 +81,7 @@ def validate_token():
 def list_of_vms():
     """Returns Cluster information for the user in the session
 
-       Expects JWT token in Authorization header
+    Expects JWT token in Authorization header
 
     """
     username = get_username_from_token()
@@ -112,9 +112,9 @@ def vm_list():
 def vm_cluster_delete(cluster: int):
     """Deletes a cluster given an ID
 
-       Expects JWT token in Authorization header
+    Expects JWT token in Authorization header
 
-       Returns True if the deletion was successful, else False
+    Returns True if the deletion was successful, else False
 
     """
     username = get_username_from_token()
