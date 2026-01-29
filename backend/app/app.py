@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from vm_controllers import User
+from user_model import User
 from auth_controller import VMAuth
 
 app = Flask(__name__)

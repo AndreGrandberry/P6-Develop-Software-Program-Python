@@ -2,21 +2,7 @@ import os
 import json
 from dataclasses import dataclass, field
 from typing import List, Optional
-
-
-@dataclass
-class VM:
-    """VM dataclass"""
-
-    vm_id: int
-    deployedclustername: str
-    deployedclusterdescr: str
-    clusterdescr: str
-    podbox: str
-    version: str
-    deployedvmstatus: str
-    deployedvmtimestamp: str
-    deployedclusterowner: str
+from vm_model import VM
 
 
 @dataclass

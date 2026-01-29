@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch, mock_open
-from app.vm_controllers import User, VM
+from app.user_model import User, VM
+
 
 import json
 
