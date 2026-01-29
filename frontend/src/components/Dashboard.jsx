@@ -70,6 +70,7 @@ function Dashboard({username}) {
 
 	const sortAscendingIds = useCallback((vmsData) => {
         // Function to sort VMs by ascending IDs
+        // Complexity of O(n log n) where n is the number of VMs
 		setTableData([]);
 		setTableRange([0, displayNumber]);
 		setPage(0);
@@ -81,6 +82,7 @@ function Dashboard({username}) {
 
 	const sortDescendingIds = useCallback((vmsData) => {
         // Function to sort VMs by descending IDs
+        // Complexity of O(n log n) where n is the number of VMs
 		setTableData([]);
 		setTableRange([0, displayNumber]);
 		setPage(0);
@@ -92,6 +94,7 @@ function Dashboard({username}) {
 
 	const sortAscendingUsers = useCallback((vmsData) => {
         // Function to sort VMs by ascending usernames
+        // Complexity of O(n log n) where n is the number of VMs
 		setTableData([]);
 		setTableRange([0, displayNumber]);
 		setPage(0);
@@ -107,6 +110,7 @@ function Dashboard({username}) {
 
 	const sortDescendingUsers = useCallback((vmsData) => {
         // Function to sort VMs by descending usernames
+        // Complexity of O(n log n) where n is the number of VMs
 		setTableData([]);
 		setTableRange([0, displayNumber]);
 		setPage(0);
